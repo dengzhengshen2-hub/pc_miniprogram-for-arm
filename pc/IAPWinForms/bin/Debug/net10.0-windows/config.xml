@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfConfigEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ConfigEntry>
+    <Key>DefaultPort</Key>
+    <Value />
+  </ConfigEntry>
+  <ConfigEntry>
+    <Key>BaudRate</Key>
+    <Value>115200</Value>
+  </ConfigEntry>
+  <ConfigEntry>
+    <Key>EncodingName</Key>
+    <Value>UTF-8</Value>
+  </ConfigEntry>
+</ArrayOfConfigEntry>

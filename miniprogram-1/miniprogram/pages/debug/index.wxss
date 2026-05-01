@@ -1,0 +1,47 @@
+.debug-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22rpx;
+}
+
+.debug-hero {
+  background: rgba(34, 27, 21, 0.94);
+  color: #fdf3e8;
+}
+
+.debug-hero-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 18rpx;
+  align-items: flex-start;
+}
+
+.debug-device {
+  margin-top: 16rpx;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #fff8ef;
+}
+
+.debug-sync {
+  margin-top: 24rpx;
+  font-size: 23rpx;
+  color: rgba(255, 248, 240, 0.72);
+}
+
+.code-scroll {
+  margin-top: 18rpx;
+  width: 100%;
+}
+
+.code-block {
+  display: block;
+  padding: 22rpx;
+  border-radius: 22rpx;
+  background: rgba(28, 25, 22, 0.94);
+  color: #f7eee4;
+  font-size: 22rpx;
+  line-height: 1.7;
+  font-family: "Consolas", "Courier New", monospace;
+  white-space: pre;
+}

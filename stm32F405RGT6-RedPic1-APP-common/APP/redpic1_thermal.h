@@ -1,0 +1,149 @@
+#ifndef REDPIC1_THERMAL_H
+#define REDPIC1_THERMAL_H
+
+#include <stdint.h>
+
+#ifndef REDPIC1_THERMAL_STAGE2_ENABLE
+    #define REDPIC1_THERMAL_STAGE2_ENABLE 1
+#endif
+
+#define REDPIC1_THERMAL_DIAG_MODE_NORMAL        0U
+#define REDPIC1_THERMAL_DIAG_MODE_TEST_PATTERN  1U
+
+#ifndef REDPIC1_THERMAL_DIAG_MODE
+    #define REDPIC1_THERMAL_DIAG_MODE REDPIC1_THERMAL_DIAG_MODE_NORMAL
+#endif
+
+#ifndef REDPIC1_THERMAL_ASYNC_PRESENT_ENABLE
+    #define REDPIC1_THERMAL_ASYNC_PRESENT_ENABLE 0
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE3D_ENABLE
+    #define REDPIC1_THERMAL_STAGE3D_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE3D_BRINGUP_SERIALIZE
+    #define REDPIC1_THERMAL_STAGE3D_BRINGUP_SERIALIZE 0
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE3D_3A_ENABLE
+    #define REDPIC1_THERMAL_STAGE3D_3A_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE3D_3B_ENABLE
+    #define REDPIC1_THERMAL_STAGE3D_3B_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE3D_3C_ENABLE
+    #define REDPIC1_THERMAL_STAGE3D_3C_ENABLE 1
+#endif
+
+#if (REDPIC1_THERMAL_STAGE3D_3B_ENABLE != 0) && (REDPIC1_THERMAL_STAGE3D_3A_ENABLE == 0)
+    #error "3D-3B requires REDPIC1_THERMAL_STAGE3D_3A_ENABLE"
+#endif
+
+#if (REDPIC1_THERMAL_STAGE3D_3C_ENABLE != 0) && \
+    ((REDPIC1_THERMAL_STAGE3D_3A_ENABLE == 0) || (REDPIC1_THERMAL_STAGE3D_3B_ENABLE == 0))
+    #error "3D-3C requires REDPIC1_THERMAL_STAGE3D_3A_ENABLE and REDPIC1_THERMAL_STAGE3D_3B_ENABLE"
+#endif
+
+#if (REDPIC1_THERMAL_STAGE3D_BRINGUP_SERIALIZE != 0) && \
+    ((REDPIC1_THERMAL_STAGE3D_3A_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE3D_3B_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE3D_3C_ENABLE != 0))
+    #error "3D-3 sub-stages require REDPIC1_THERMAL_STAGE3D_BRINGUP_SERIALIZE=0"
+#endif
+
+#if (REDPIC1_THERMAL_STAGE3D_ENABLE == 0) && \
+    ((REDPIC1_THERMAL_STAGE3D_3A_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE3D_3B_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE3D_3C_ENABLE != 0))
+    #error "3D-3 sub-stages require REDPIC1_THERMAL_STAGE3D_ENABLE"
+#endif
+
+#if (REDPIC1_THERMAL_STAGE3D_ENABLE != 0) && \
+    (REDPIC1_THERMAL_STAGE3D_BRINGUP_SERIALIZE == 0) && \
+    (REDPIC1_THERMAL_STAGE3D_3A_ENABLE == 0)
+    #error "REDPIC1_THERMAL_STAGE3D_BRINGUP_SERIALIZE=0 requires REDPIC1_THERMAL_STAGE3D_3A_ENABLE"
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6_ENABLE
+    #define REDPIC1_THERMAL_STAGE6_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6_6A_ENABLE
+    #define REDPIC1_THERMAL_STAGE6_6A_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6_6B_ENABLE
+    #define REDPIC1_THERMAL_STAGE6_6B_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6_6C_ENABLE
+    #define REDPIC1_THERMAL_STAGE6_6C_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6_6D_ENABLE
+    #define REDPIC1_THERMAL_STAGE6_6D_ENABLE 0
+#endif
+
+#if (REDPIC1_THERMAL_STAGE6_ENABLE == 0) && \
+    ((REDPIC1_THERMAL_STAGE6_6A_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE6_6B_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE6_6C_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE6_6D_ENABLE != 0))
+    #error "Stage 6 sub-stages require REDPIC1_THERMAL_STAGE6_ENABLE"
+#endif
+
+#if (REDPIC1_THERMAL_STAGE6_6D_ENABLE != 0) && (REDPIC1_THERMAL_STAGE6_6A_ENABLE == 0)
+    #error "Stage 6D requires REDPIC1_THERMAL_STAGE6_6A_ENABLE"
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6V_ENABLE
+    #define REDPIC1_THERMAL_STAGE6V_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6V_2_ENABLE
+    #define REDPIC1_THERMAL_STAGE6V_2_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6V_3_ENABLE
+    #define REDPIC1_THERMAL_STAGE6V_3_ENABLE 1
+#endif
+
+#ifndef REDPIC1_THERMAL_STAGE6V_4_ENABLE
+    #define REDPIC1_THERMAL_STAGE6V_4_ENABLE 1
+#endif
+
+#if (REDPIC1_THERMAL_STAGE6V_ENABLE == 0) && \
+    ((REDPIC1_THERMAL_STAGE6V_2_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE6V_3_ENABLE != 0) || \
+     (REDPIC1_THERMAL_STAGE6V_4_ENABLE != 0))
+    #error "Stage 6V sub-stages require REDPIC1_THERMAL_STAGE6V_ENABLE"
+#endif
+
+#if (REDPIC1_THERMAL_STAGE6V_3_ENABLE != 0) && (REDPIC1_THERMAL_STAGE6V_2_ENABLE == 0)
+    #error "Stage 6V-3 requires REDPIC1_THERMAL_STAGE6V_2_ENABLE"
+#endif
+
+#if (REDPIC1_THERMAL_STAGE6V_4_ENABLE != 0) && \
+    ((REDPIC1_THERMAL_STAGE6V_2_ENABLE == 0) || (REDPIC1_THERMAL_STAGE6V_3_ENABLE == 0))
+    #error "Stage 6V-4 requires REDPIC1_THERMAL_STAGE6V_2_ENABLE and REDPIC1_THERMAL_STAGE6V_3_ENABLE"
+#endif
+
+extern uint8_t displayPaused;
+
+void redpic1_thermal_init(void);
+void redpic1_thermal_bind_display_runtime(void);
+void redpic1_thermal_step(void);
+uint32_t redpic1_thermal_get_active_period_ms(void);
+void redpic1_thermal_force_refresh(void);
+void redpic1_thermal_handle_key(uint8_t key_value);
+void redpic1_thermal_render_runtime_overlay(void);
+uint8_t redpic1_thermal_runtime_overlay_visible(void);
+void redpic1_thermal_suspend(void);
+void redpic1_thermal_resume(void);
+void redpic1_thermal_restore_bus_after_stop(void);
+void redpic1_thermal_set_overlay_hold(uint8_t enabled);
+
+#endif

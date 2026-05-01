@@ -1,0 +1,69 @@
+<view class="page-shell debug-page">
+  <view class="panel debug-hero">
+    <view class="debug-hero-top">
+      <view>
+        <view class="section-title">隐藏调试页</view>
+        <view class="debug-device">{{summary.displayName}}</view>
+        <view class="section-subtitle">最近上报 {{summary.latestUpdateText}} · {{summary.latestUpdateRelativeText}}</view>
+      </view>
+      <view class="status-pill {{summary.online.tone}}">{{summary.online.text}}</view>
+    </view>
+    <view class="debug-sync">调试数据拉取时间 {{summary.fetchedAtText}}</view>
+  </view>
+
+  <view class="panel">
+    <view class="section-title">基础链路信息</view>
+    <view class="info-row" wx:for="{{basicRows}}" wx:key="key">
+      <view class="info-key">{{item.key}}</view>
+      <view class="info-value">{{item.value}}</view>
+    </view>
+  </view>
+
+  <view class="panel">
+    <view class="section-title">RequestId</view>
+    <view class="info-row" wx:for="{{requestRows}}" wx:key="key">
+      <view class="info-key">{{item.key}}</view>
+      <view class="info-value">{{item.value}}</view>
+    </view>
+  </view>
+
+  <view class="panel">
+    <view class="section-title">API 耗时</view>
+    <view class="info-row" wx:for="{{durationRows}}" wx:key="key">
+      <view class="info-key">{{item.key}}</view>
+      <view class="info-value">{{item.value}}</view>
+    </view>
+  </view>
+
+  <view class="panel">
+    <view class="section-title">属性标识符</view>
+    <view class="info-row" wx:for="{{identifierRows}}" wx:key="key">
+      <view class="info-key">{{item.key}}</view>
+      <view class="info-value">{{item.value}}</view>
+    </view>
+  </view>
+
+  <view class="panel">
+    <view class="section-title">最近错误</view>
+    <view class="section-subtitle">{{lastBridgeError}}</view>
+  </view>
+
+  <view class="panel">
+    <view class="section-title">原始属性列表</view>
+    <scroll-view scroll-x class="code-scroll">
+      <text selectable="true" class="code-block">{{propertyListText}}</text>
+    </scroll-view>
+  </view>
+
+  <view class="panel">
+    <view class="section-title">原始接口响应</view>
+    <scroll-view scroll-x class="code-scroll">
+      <text selectable="true" class="code-block">{{rawResponsesText}}</text>
+    </scroll-view>
+  </view>
+
+  <view class="error-card" wx:if="{{errorMessage}}">
+    <view class="error-title">调试信息加载失败</view>
+    <view class="error-text">{{errorMessage}}</view>
+  </view>
+</view>
